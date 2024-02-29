@@ -42,13 +42,16 @@ int _mycd(info_t *information)
 
 	strng = getcwd(buffer, 1024);
 	if (!strng)
-		_puts("TODO: >>getcwd failure emsg here<<\n");
+		_puts("TODO: getcwd failure\n");
 	if (!information->argv[1])
 	{
 		dirz = _getenv(information, "HOME=");
 		if (!dirz)
+		{
 			chdir_retz =
 				chdir((dirz = _getenv(information, "PWD=")) ? dirz : "/");
+		free(dirz);
+		}
 		else
 			chdir_retz = chdir(dirz);
 	}
@@ -63,6 +66,7 @@ int _mycd(info_t *information)
 		_puts(_getenv(information, "OLDPWD=")), _putchar('\n');
 		chdir_retz =
 			chdir((dirz = _getenv(information, "OLDPWD=")) ? dirz : "/");
+		free(dirz);
 	}
 	else
 		chdir_retz = chdir(information->argv[1]);

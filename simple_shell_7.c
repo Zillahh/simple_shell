@@ -33,7 +33,7 @@ int _unsetenv(info_t *information, char *varz)
 	if (!nodez || !varz)
 	{
 		fprintf(stderr, "Failed to unset environment variable: variable not found\n");
-		return -1;
+		return (-1);
 	}
 
 
