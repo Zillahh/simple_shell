@@ -31,7 +31,11 @@ int _unsetenv(info_t *information, char *varz)
 	char *pp;
 
 	if (!nodez || !varz)
-		return (0);
+	{
+		fprintf(stderr, "Failed to unset environment variable: variable not found\n");
+		return -1;
+	}
+
 
 	while (nodez)
 	{
@@ -65,11 +69,19 @@ int _setenv(info_t *information, char *varz, char *valuez)
 	char *pp;
 
 	if (!varz || !valuez)
-		return (0);
+	{
+		fprintf(stderr, "Failed to set environment variable: invalid input\n");
+		return (1);
+	}
 
 	buff = malloc(_strlen(varz) + _strlen(valuez) + 2);
+
 	if (!buff)
+	{
+		fprintf(stderr, "Failed to allocate memory for environment variable\n");
 		return (1);
+	}
+
 	_strcpy(buff, varz);
 	_strcat(buff, "=");
 	_strcat(buff, valuez);
